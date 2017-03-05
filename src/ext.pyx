@@ -29,6 +29,7 @@ class CabInfo:
 cdef class CabFile:
     cdef ext.mscab_decompressor *_c_cab_decompressor
     cdef ext.mscabd_cabinet *_c_cabd_cabinet
+    cdef unicode file_name
 
     def __cinit__(self):
         result = 1
@@ -40,6 +41,7 @@ cdef class CabFile:
             raise Exception('Cannot create underlying CAB decompressor')
 
     def __init__(self, name=None):
+        self.file_name = name
         if name is not None:
             self.open(name)
 
